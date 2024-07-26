@@ -1,0 +1,465 @@
+// hello world 
+
+// hay first we need to install the npx
+
+// then create the npm expo app
+
+npx create-expo-app@latest Instagram-clone --template
+
+// then here we need to choose what type of templet you want to choose for developing this app
+// here we choose
+
+blank-templet
+
+// then check whether you node versin is up to date or not
+// if it is not then google it to update the new latest node
+
+
+/// after install alll the things 
+// then to start the comand we use
+
+npm start
+
+
+// after starting we need some depandence like 
+//first we are going to install is:
+
+npx expo install react-native-web react-dom @expo/metro-runtime
+
+// after that:
+
+npx expo install expo-router react-native-safe-area-co
+ntext rea
+ct-native-screens expo-linking expo-constants expo-status-bar
+
+
+// then install:
+  npx expo install react-native-web react-dom
+
+
+
+
+//// ------------ now we need to do some configuration
+// go to the package.json
+// then convert the main 
+
+{
+
+ "main": "expo-router/entry",
+
+}
+
+
+/// --------- then do some changes into app.json
+// here we need to add the schema and the value to this schema is user wish
+
+{
+  "expo": {
+    "name": "Instagram-Clone",
+    "slug": "Instagram-Clone",
+    "schema": "xtempo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    }
+
+
+    
+
+    ///----- now we need to add some config in the app.json
+    //this is before
+{
+  "web": {
+      "favicon": "./assets/favicon.png"
+      
+    },
+}
+
+
+
+    //this is after changes
+
+    {
+          "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+      
+    },
+    },
+
+
+
+/// now to fix all the dependences are install then we are refreshing
+// then packages we are using
+
+npm start -- -c
+
+
+
+
+
+
+//////////////+++++++++++++ now are are going to create the work
+
+// first create the src folder to kept our all code in one place
+
+
+// after creating the src folder 
+
+
+// then in that src we have to folder app and components
+
+// and in app folder we create index.tsx in it
+// this index.tsx have the home screen property in it
+
+import { Link } from "expo-router";
+import { View, Text } from "react-native";
+
+export default function Home(){
+
+    return (
+        // this is link work
+        // <Link href="/about"> go to About us</Link>
+
+
+        <Text>Hello Welcome to the Next  Generation Ai</Text>
+
+    )
+}
+
+
+// now we are creating the _layout.tsx file for rendering the layout 
+// of the index.tsx
+
+import { Slot } from "expo-router"
+import { Text } from "react-native"
+
+export default function RootLayout(){
+    return <Text> </Text>;
+}
+
+
+/// //+++++++++++ how to use Slot
+// in here if we use Slot we can render the index.tsx Text line 
+// (Hello Welcome to the Next  Generation Ai)
+import { Slot } from "expo-router"
+import { Text } from "react-native"
+
+export default function RootLayout(){
+    return <Slot />;
+}
+
+
+//// ---------- how to use Stack 
+// and if we use Stack then we render the index.tsx Text line
+// and its file name index on the navigation bar
+
+import { Slot, Stack } from "expo-router"
+import { Text } from "react-native"
+
+export default function RootLayout(){
+    return <Stack />;
+}
+
+
+
+////------------ how to use Tabs
+// if we use Tabe we get the tabs button for moving in different layouts
+// layout like index to about and bout to index
+
+import { Slot , Stack, Tabs } from "expo-router"
+import { Text } from "react-native"
+
+export default function RootLayout(){
+    return <Tabs />
+}
+
+
+
+
+/////////////+++++++++++++++++ after that we are going to create the 
+/// folder for different layouts by using paranthesis ()
+
+eg:
+
+(tabs)
+
+// by creating the folder in the paranthesis helps in grouping
+// the differnent layout in single layout and this folder 
+// would not effect the other layout outside this folder
+
+
+
+
+/////+++++++++++++++++++ now in outside index.tsx
+// we are using Redirect for representing the other file from the 
+// () folder to the home screen or index.tsx file
+
+import { Link, Redirect } from "expo-router";
+import { View, Text } from "react-native";
+
+export default function Home(){
+
+    return (
+        // this is link work
+        // <Link href="/about"> go to About us</Link>
+        <View>
+        <Redirect href="/(tabs)"/>
+        <Text>Hello Welcome to the Next  Generation Ai</Text>
+        </View>
+    )
+}
+
+
+
+
+
+////// ------------------ now go to _layout.tsx of the Tabs folder
+// and ther we are going to place some icon on that screen and make a icon
+// for on that screen and by using Tabs like this
+
+import { Tabs } from "expo-router";
+
+// here we import the home icon from the expo vector which gives icon to us
+import { FontAwesome } from '@expo/vector-icons';
+
+
+
+export default function TabsLayout(){
+
+    return (
+        <Tabs screenOptions={{ tabBarActiveTintColor: "blue"}}>
+            <Tabs.Screen name = 'index' options={{ headerTitle: 'For You', tabBarIcon: ({color}) => <FontAwesome name="home" size={24} color={color} />}} />,
+        </Tabs>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/////// now in _layout.tsx we add some tabs properties
+
+import { Slot, Tabs } from "expo-router";
+import { FontAwesome } from '@expo/vector-icons';
+
+
+
+export default function TabsLayout() {
+
+    return (
+        <Tabs screenOptions={{ tabBarActiveTintColor: "blue", tabBarShowLabel: false }}>
+
+            <Tabs.Screen
+                name='index'
+                options={{
+                    headerTitle: 'For You',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name="home" size={26} color={color} />
+                    ),
+
+                }}
+            />,
+
+            <Tabs.Screen
+                name='new'
+                options={{
+                    headerTitle: 'Create post',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name="plus-square-o" size={26} color={color} />
+                    ),
+                }}
+            />,
+
+            {/* this is for profile tab screen */}
+
+            <Tabs.Screen
+                name='profile'
+                options={{
+                    headerTitle: 'Profile',
+                    tabBarIcon: ({ color }) => (
+                        <FontAwesome name="user" size={26} color={color} />
+                    ),
+                }}
+            />,
+
+            
+        </Tabs>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+///// ++++++++++++++++++ for styling the layout we are using 
+// tailwind css so for that we need to install tailwind css and 
+// then we its setup
+
+
+
+
+Expo Router
+Installation
+
+//// 1. Install NativeWind
+
+You will need to install nativewind@^4.0.1 and it's peer dependencies tailwindcss and react-native-reanimated.
+
+    npm
+    yarn
+    pnpm
+    Expo
+
+// below is for Expo
+npx expo install nativewind@^4.0.1 react-native-reanimated tailwindcss
+
+
+/// if you are using expo router then skip the pod-install 
+//Run pod-install to install Reanimated pod:
+
+npx pod-install
+
+
+///2. Setup Tailwind CSS
+
+Run npx tailwindcss init to create a tailwind.config.js file
+
+Add the paths to all of your component files in your tailwind.config.js file.
+tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // NOTE: Update this to include the paths to all of your component files.
+ 
+////////+++++ here we need to add and remove some property
+// in places of app we have src source file having js, jsx, tsx 
+// new one is  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+Create a CSS file and add the Tailwind directives
+global.css
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+info
+
+From here onwards, replace ./global.css with the relative path to the CSS file you just created
+
+////3. Add the Babel preset
+
+    SDK 49
+    SDK 50+
+
+//////  we need to check our bable.config.js is it 50+ or 49
+/// for that we need to go inside the package.json and inside
+
+ "dependencies": {
+    "@expo/metro-runtime": "~3.2.1",
+    "expo": "~51.0.20",     /// her our expo version is 51.0
+    "expo-router": "~3.5.18",
+    "expo-status-bar": "~1.12.1",
+    "nativewind": "^4.0.1",
+    "rea": "^0.0.1",
+
+so we need to configure according to 50+ version
+
+
+babel.config.js
+
+module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+    plugins: [
+      // Required for expo-router
+      "expo-router/babel",
+      "react-native-reanimated/plugin",
+    ]
+  };
+};
+
+
+//// in bable we only need to past the presents: or plugins in the 
+/// bable.comfig.js file bcs they are not present is the raw babel
+/// so new babel will be
+
+/// it is the new babel that we have configured by removing  
+/// some unreliable components
+
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};
+
+
+/////4. Modify your metro.config.js
+
+If your project does not have a metro.config.js run npx expo customize metro.config.js
+
+    SDK 49
+    SDK 50+
+
+metro.config.js
+
+const { getDefaultConfig } = require("expo/metro-config");
+const { withNativeWind } = require('nativewind/metro');
+
+const config = getDefaultConfig(__dirname, { isCSSEnabled: true })
+
+module.exports = withNativeWind(config, { input: './global.css' })
+
+5. Import your CSS file
+app/_layout.js
+
+import Slot from "expo-router/Slot";
+
+// Import your global CSS file
+import "../global.css"
+
+export default Slot
+
+6. TypeScript (optional)
+Please follow the TypeScript guide.
+
+Version: v4
+Typescript
+
+NativeWind extends the React Native types via declaration merging. The simplest method to include the types is to create a new nativewind-env.d.ts file and add a triple-slash directive referencing the types.
+
+/// <reference types="nativewind/types" />
+
+
