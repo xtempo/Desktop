@@ -1,9 +1,9 @@
 import { Tabs } from "expo-router";
 
 
-export default function profile(){
+export default function ProfileScreen(){
 
     return (
-        <Tabs>Profile</Tabs>
+        <Tabs>Profile Screen</Tabs>
     )
 }

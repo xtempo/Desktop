@@ -1,9 +1,10 @@
-import { Tabs } from "expo-router";
+import { Stack, Tabs } from "expo-router";
 
 
-export default function New(){
+export default function CreatePost(){
 
     return (
-        <Tabs>New</Tabs>
+        <Tabs>Create Post</Tabs>
+        
     )
 }
