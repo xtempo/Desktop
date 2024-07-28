@@ -1,0 +1,3 @@
+/// for better and helpfull extention is 
+1) tailwind css extention
+2) expo tools extention 

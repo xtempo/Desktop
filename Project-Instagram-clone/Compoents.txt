@@ -1,0 +1,154 @@
+///// why we use components items
+
+//// when we have to use the same code multiple time then 
+//// that codes are place in the componenets so, we can 
+//// use that code components multiple times
+
+
+//// in componenets folder now we are creating the components 
+/// called PostListItem.tsx for rendering our post for multiple times
+
+
+/// now we nned to move our index.tsx body to postListItem.tsx 
+//// and remove the prevous body of content  like this 
+
+
+
+//// it is is in index.tsx
+
+import { Text, View, Image , } from "react-native";
+import posts from "~/assets/data/posts.json";
+import {Ionicons, Feather, AntDesign} from '@expo/vector-icons';
+
+// now we only need to import the postListItem form the components
+// and directly implement the PostListItem in the index.tsx file
+import PostListItem from "~/src/components/PostListItem";
+
+
+const post1 = posts[0];
+
+export default function FeedScreen() {
+
+    console.log(post1);
+    return(
+        <View>
+            // here we have directly implement the PostListItem in View
+            // and we get the same result like earlyer in the index.tsx
+            <PostListItem />
+            <PostListItem />
+
+        </View>
+    );
+}
+
+
+//// it is in PostListItem.tsx
+import { Text, View, Image , } from "react-native";
+import posts from "~/assets/data/posts.json";
+import {Ionicons, Feather, AntDesign} from '@expo/vector-icons';
+
+
+const post1 = posts[0];
+
+export default function PostListItem(){
+
+    return (
+
+        <View className="bg-blue-600">
+            {/* Header of our post */}
+            <View 
+            className="p-3 space-x-1 flex-row items-center gap-1">
+                <Image 
+                source={{ uri: post1.user.image_url}}  className=" w-12 aspect-square rounded-full"/>
+
+                <Text className="font-semibold " > {post1.user.username} </Text>
+            </View>
+
+            {/* image or post of that profile */}
+            <Image
+                source={{ uri: post1.image_url }}
+                className=" w-full aspect-[4/3] " />
+
+
+            {/* icons like heart, comment, share */}
+            <View className="flex-row gap-3 p-3">
+                 <AntDesign  name="hearto" size={20}/>
+                 <Ionicons name="chatbubble-outline" size={20} />
+                 <Feather name="send" size={20}/>
+
+                 <Feather name="bookmark" size={20} className="ml-auto"/>
+
+            </View>
+        </View>
+    );
+}
+
+
+
+
+///// ++++++++++++++ now to send the request for data from index.tsx we need  
+  
+    return(
+        <View>
+            <PostListItem post={posts[0]}/>
+            <PostListItem post={posts[1]}/>
+
+        </View>
+    );
+}
+
+
+
+
+/////+++++++++++++++++ and to received the data from the index.tsx to
+/////                  PostListItem.tsx is 
+
+
+
+/// here we nned to add the paramater props in the PostListItem() like this PostListItem(props)
+export default function PostListItem(props){
+
+/// and we need to implenet the paramter with its attributes post with it
+/// <PostListItem post={posts[0]}/> here we add post attribute to it
+/// so to acces the data to post attribute we need to instantiate the
+// the post attribute to post1  
+
+    const post1 = props.post;
+
+    return (
+
+        <View className="bg-blue-600">
+            {/* Header of our post */}
+            <View 
+            className="p-3 space-x-1 flex-row items-center gap-1">
+                <Image 
+                source={{ uri: post1.user.image_url}}  className=" w-12 aspect-square rounded-full"/>
+
+                <Text className="font-semibold " > {post1.user.username} </Text>
+            </View>
+
+
+
+//////------ we can also destructuring it with post
+
+
+export default function PostListItem({ post }){
+
+
+    return (
+
+        <View className="bg-white">
+            {/* Header of our post */}
+            <View 
+            className="p-3 space-x-1 flex-row items-center gap-1">
+                <Image 
+               
+
+
+
+
+
+
+
+
+

@@ -463,3 +463,643 @@ NativeWind extends the React Native types via declaration merging. The simplest 
 /// <reference types="nativewind/types" />
 
 
+
+
+
+
+
+/////  now to use the css in layout 
+/// we use like 
+
+
+import { Text,View } from "react-native";
+
+
+export default function FeedScreen() {
+
+    return (
+
+/// inside className we put our css styling
+        <View className="bg-slate-600 flex-1 item-center justify-top m-10">
+            <Text className="text-5xl font-light text-blue-500 text-center">Feed</Text>
+        </View>
+    )
+}
+
+
+
+
+//////// important point 
+//// how to make responsive css styling using nativewind
+
+/// by using md (mediam device) with colum(:) using this we can
+/// create rensponsive web and app application
+
+ <Text className="text-3xl md:text-5xl font-light text-blue-500 md:text-pink-500 text-center">Feed</Text>
+
+
+
+ //////
+
+
+
+
+
+
+
+
+
+
+
+ ++++++++++++++++ now we are going to import the data like user anem 
+from posts.json inside the index.tsx
+// after installing the json file for insternet than we nned to save that 
+// json file in assets folder in that asset folder we have created another
+// folder name data in that folder we have saveed that json file 
+//
+/// first we nned to import that post from the posts.json file
+// 
+import { Text,View } from "react-native";
+import posts from "../../../assets/data/posts.json"
+
+
+const post1 = posts[0];
+
+export default function FeedScreen() {
+
+    console.log(post1);
+    return (
+
+        <View className="bg-slate-600 flex-1 item-center justify-top m-10">
+            <Text className="text-3xl md:text-5xl font-light text-blue-500 md:text-pink-500 text-center">Feed</Text>
+        </View>
+    )
+}
+
+
+///    2) way to import the posts.js
+//// for make it more easy way to import is 
+// first we need to go to tsconfig.json inside that tsconfig 
+// we need to create the baseUrl and paths in that tsconfig.json 
+
+\//before:
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+  }
+}
+
+
+
+
+// after
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["*"],
+    }
+  }
+}
+
+import { Text,View } from "react-native";
+import posts from "~/assets/data/posts.json"
+
+
+const post1 = posts[0];
+
+export default function FeedScreen() {
+
+    console.log(post1);
+    return (
+
+        <View className="bg-slate-600 flex-1 item-center justify-top m-10">
+            <Text className="text-3xl md:text-5xl font-light text-blue-500 md:text-pink-500 text-center">Feed</Text>
+        </View>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+//////////////////+++++++++++++ now we are implenting our design
+//// inside the layout
+
+/// for that first we are desiginig the image section in the index.tsx of (tabs)
+
+
+//// for implementing the image we need to import the image from the react-Native
+
+/// here we import the Image with other react-native components
+import { Text,View,Image } from "react-native";
+import posts from "~/assets/data/posts.json"
+
+
+
+const post1 = posts[0];
+
+export default function FeedScreen() {
+
+    console.log(post1);
+    return (
+
+        <View className="">
+        // here we are implementing the Image class in the View
+        image class have source function for accessing the image source
+            <Image  
+            source={{ uri: post1.image_url}} 
+            // here w (width)- is full  aspect(aspect-height ratio)- is 4/3
+            className=" w-full aspect-[4/3] "/>
+        </View>
+    )
+}
+
+
+//////+++++++++++++++++++++ heading of the index.tsx
+
+//// now we are desinging the usericon or user-profile image
+// for that we are creating another view for the user-profile image
+// then in that view we are using image class in it
+
+
+const post1 = posts[0];
+
+export default function FeedScreen() {
+
+    console.log(post1);
+    return (
+
+        <View className="">
+        /// here the user profile-image
+            {/* Header of our post */}
+            <View>
+                <Image 
+                source={{ uri: post1.user.image_url}}  className=" w-12 aspect-square rounded-full"/>
+            </View>
+            <Image
+                source={{ uri: post1.image_url }}
+                className=" w-full aspect-[4/3] " />
+        </View>
+    )
+}
+
+
+
+
+
++++++++++++++++++++ header
+//// now in heading we text for the username
+
+////       {/* Header of our post */}
+            <View 
+            className="p-2 space-x-1 flex-row items-center gap-1">
+                <Image 
+                source={{ uri: post1.user.image_url}}  className=" w-12 aspect-square rounded-full"/>
+
+                <Text className="font-semibold " > {post1.user.username} </Text>
+            </View>
+
+  
+
+
+
+
+
+
+
+
++++++++++++++++++ footer
+//////// and in the footer we are adding the icon 
+///// like heart, comment, message, share, bookmark, etc
+
+   {/* icons like heart, comment, share */}
+            <View className="flex-row gap-3">
+                 <AntDesign  name="hearto" size={20}/>
+                 <Ionicons name="chatbubble-outline" size={20}>
+                 <Feather name="send" size={20}/>
+
+                 <Feather name="bookmark" size={20} className="ml-auto"/>
+
+            </View>
+
+
+
+
+
+//////++++++++++++++++++ now index.tsx body is like 
+
+
+ <View className="">
+            {/* Header of our post */}
+            <View 
+            className="p-2 space-x-1 flex-row items-center gap-1">
+                <Image 
+                source={{ uri: post1.user.image_url}}  className=" w-12 aspect-square rounded-full"/>
+
+                <Text className="font-semibold " > {post1.user.username} </Text>
+            </View>
+
+            {/* image or post of that profile */}
+            <Image
+                source={{ uri: post1.image_url }}
+                className=" w-full aspect-[4/3] " />
+
+
+            {/* icons like heart, comment, share */}
+            <View className="flex-row gap-3">
+                 <AntDesign  name="hearto" size={20}/>
+                 <Ionicons name="chatbubble-outline" size={20}>
+                 <Feather name="send" size={20}/>
+
+                 <Feather name="bookmark" size={20} className="ml-auto"/>
+
+            </View>
+        </View>
+
+
+
+
+///// now go to Components.txt 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////++++++++++++++++++++++
+
+to render every data from the API we need to loop the API so we
+make the whole list of data scrollable and able to see the data on
+the screen
+
+
+
+//// to do that we are importing the FlatList components from the react-native 
+/// 
+import { Text, View, Image , FlatList} from "react-native";
+import posts from "~/assets/data/posts.json";
+import {Ionicons, Feather, AntDesign} from '@expo/vector-icons';
+import PostListItem from "~/src/components/PostListItem";
+
+
+
+
+export default function FeedScreen() {
+
+    
+    return(
+        <View>
+            <PostListItem post={posts[3]}/>
+            <PostListItem post={posts[2]}/>
+
+        </View>
+    );
+}
+
+
+
+//// now we are implementthe FlatList
+// to do that we we need to comment the earlier return just like below
+
+import { Text, View, Image , FlatList} from "react-native";
+import posts from "~/assets/data/posts.json";
+import {Ionicons, Feather, AntDesign} from '@expo/vector-icons';
+import PostListItem from "~/src/components/PostListItem";
+
+
+export default function FeedScreen() {
+
+    return (
+
+///  here we are using FlatList and it has two main component
+///  1) data and 2) renderItem
+        <FlatList 
+            data={posts}   // data from the posts
+
+            // and we are render the data from the posts
+            // to render the item use use arrow function to 
+            // perform the postListItem method and render the data
+            /// and also assign the parameter  {item} using scope {}
+
+            renderItem={({ item }) => <PostListItem post={item}/>}
+        
+        
+        />
+    )
+
+    ///// this are commented below
+    // return(
+    //     <View>
+    //         <PostListItem post={posts[3]}/>
+    //         <PostListItem post={posts[2]}/>
+
+    //     </View>
+    // );
+}
+
+
+
+
+
+///// in the website mode we get whole data of post on the screen
+
+
+//// and to add the space between the post we use 
+contentContainerStyle in the FlatList
+
+export default function FeedScreen() {
+
+    return (
+
+        <FlatList 
+            data={posts}
+            // here we use the contentContainerStyle for gap btw the post
+            contentContainerStyle={{gap: 20}}
+            renderItem={({ item }) => <PostListItem post={item}/>}
+            showsVerticalScroolIndecator={false}   /// it is for vertical scroll
+        />
+    )
+
+
+
+
+
+
+
+
+///// now to make it responsive in both mobile and web for our post
+////  we have to give the max-width and then width to  contentContainerStyle
+
+
+export default function FeedScreen() {
+
+    return (
+
+        <FlatList 
+            data={posts}
+            contentContainerStyle={{gap: 20, maxWidth: 512, alignSelf: 'center', width: '100%'}}
+            renderItem={({ item }) => <PostListItem post={item}/>}
+            showsVerticalScrollIndicator={false}
+        />
+    )
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------|
+                                                                                      |
+////////////+++++++++++++++++++ now we are desiging the new tab layout                |
+                                                                                      |
+--------------------------------------------------------------------------------------|
+
+
+
+
+
+///// 1) in the new tab we are going to create user adding there post
+//// before posting there post
+
+///// 2) we are adding the change button for changing there post 
+
+
+///// 3) makin the text box for adding the caption before posting there 
+/////    post on the online
+
+///// 4) create the button for posting the final post of the user
+////     on the online
+
+
+
+
+import { View, Text, Image, TextInput } from "react-native";
+
+
+export default function CreatePost() {
+
+    return (
+        <View className="p-3 items-center m-4">
+           /// for image space
+            {/* Image picker from the user */}
+            <Image source={{ uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg' }}
+                className="w-60 aspect-[3/4] rounded-lg shadow-md m-4"
+            />
+
+            
+            {/* add the change post button */}
+            <Text onPress={() => {}} className="text-blue-500 font-semibold m-5">Change</Text>
+
+
+            /// for input the text we need to import the TextInput 
+            // from the react-native then paced is here
+            {/* TextInput for the caption from the user */}
+           <TextInput placeholder="What is on your mind?" className="bg-blue-500 m-3 w-full h-20 p-3 rounded-lg"/>
+
+
+            {/* Button for sending the caption */}
+        </View>
+
+    )
+}
+
+
+
+
+
+///////////// now to access the user textinput we need to 
+/////      import a class useState from the react
+
+import { useState } from "react";
+
+// then implement the method in it
+
+
+import { View, Text, Image, TextInput } from "react-native";
+import { useState } from "react";
+
+
+export default function CreatePost() {
+
+/// here we are using two variable for useState() method one is 
+/// caption and another is setCaption,
+/// then we need to implement the value attribute in the TextInput
+//// like below in the TextInput (TextInput value={caption})
+/// for getting the value of the text in caption variable 
+
+
+
+
+//// if we write somthing in the useState method  useState('356ygbn')
+/// then it always comes back on the TextInput field
+    const [caption, setCaption] =useState('')
+
+    return (
+        <View className="p-3 items-center m-4">
+            {/* Image picker from the user */}
+            <Image source={{ uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg' }}
+                className="w-60 aspect-[3/4] rounded-lg shadow-md m-4"
+            />
+
+            {/* add the change post button */}
+            <Text onPress={() => {}} className="text-blue-500 font-semibold m-5">Change</Text>
+
+
+            {/* TextInput for the caption from the user */}
+
+            <TextInput value={caption} placeholder="What is on your mind?" className="bg-blue-500 m-3 w-full h-20 p-3 rounded-lg"/>
+
+            {/* Button for sending the caption */}
+        </View>
+
+    )
+}
+
+
+
+
+
+
+//// to solve the user TextInput set problem we are 
+//// implementing the onChangeText and creating the the 
+//// arrow function having parameter newValue for accessing 
+//// whatever we write in the TextInput will be stored in
+//// parameter and then it will perform some action by 
+//// setting the setCaption a paramater value newValue in it
+
+
+
+onChangeText={(newValue) => setCaption(newValue)}
+
+// it is a attribut in react-native
+
+  return (
+        <View className="p-3 items-center m-4">
+            {/* Image picker from the user */}
+            <Image source={{ uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg' }}
+                className="w-60 aspect-[3/4] rounded-lg shadow-md m-4"
+            />
+
+            {/* add the change post button */}
+            <Text onPress={() => {}} className="text-blue-500 font-semibold m-5">Change</Text>
+
+
+            {/* TextInput for the caption from the user */}
+
+            <TextInput 
+               value={caption} 
+=> here it is  onChangeText={(newValue) => setCaption(newValue)}
+               placeholder="What is on your mind?" 
+               className="bg-blue-500 m-3 w-full h-20 p-3 rounded-lg"/>
+
+            {/* Button for sending the caption */}
+        </View>
+
+    )
+
+
+
+
+//// now are creating the button for the use to send there post
+///  for that we are using pressable components by importing 
+///  Pressable from the react-native
+
+
+import { View, Text, Image, TextInput, Pressable } from "react-native";
+
+
+// then applying the pressable in the place of button
+
+/// before that to make this button more useable we are going to 
+/// creating a componts of the buttonin view
+
+like this
+
+            <View className="mt-auto w-full">  // mt (margin-top= auto)
+                <Pressable className="bg-blue-500 items-center w-full h-10 p-3 rounded-md">
+                    <Text className="text-white font-semibold">Share</Text>
+                </Pressable>
+            </View>
+
+/// but it will not comes on bottom to do that we need to 
+/// make our main <View> flex
+
+<View className="p-3 items-center flex-1">
+
+
+import { View, Text, Image, TextInput, Pressable } from "react-native";
+import { useState } from "react";
+
+
+export default function CreatePost() {
+
+    const [caption, setCaption] = useState('')
+
+    return (
+=> here  <View className="p-3 items-center flex-1">
+            {/* Image picker from the user */}
+            <Image source={{ uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg' }}
+                className="w-60 aspect-[3/4] rounded-lg shadow-md m-4"
+            />
+
+            {/* add the change post button */}
+            <Text onPress={() => { }} className="text-blue-500 font-semibold m-5">Change</Text>
+
+
+
+            {/* TextInput for the caption from the user */}
+            <TextInput
+                value={caption}
+                onChangeText={(newValue) => setCaption(newValue)}
+                placeholder="What is on your mind?"
+
+  ==> here i have also change in hight of TextInput h-16 early height is h-20              
+                className="bg-blue-500 m-3 w-full h-16 p-3 rounded-lg" />
+
+
+            {/* Button for sending the caption */}
+
+            <View className="mt-auto w-full">
+                <Pressable className="bg-blue-500 items-center w-full h-10 p-3 rounded-md">
+                    <Text className="text-white font-semibold">Share</Text>
+                </Pressable>
+            </View>
+
+        </View>
+
+    )
+}
